@@ -1,0 +1,92 @@
+The Battery Audit Module will facilitate detailed tracking, traceability, and auditing of assets. Reports will be uploaded in tabular form. The module will be accessible to the following user roles:
+
+i.	Warehouse
+ii.	FP (Franchise Partner)
+iii.	KAE (Key Account Executive
+iv.	Service 
+
+
+Functionalities and Workflow
+1.	Data Upload in CRM: Warehouse Manager will Upload data in the CRM under Audit Page tagging to Franchise. The uploaded data will show on the leasing app in Audit Page, where KAE will audit the tagged assets.
+	Total number of assets issued to the franchise will be uploaded manually through CSV/xslx format in CRM by the Warehouse Manager having the following details in the bulk uploader:
+i.	Asset Make
+ii.	Serial Number
+iii.	IOT Number
+iv.	Asset Model
+v.	FP SAP Code (Input field in CRM)
+2.	Audit In Leasing App by KAE: KAE will do the audit in the Leasing application once the assets are uploaded in the CRM. The uploaded assets will be shown in the Audit Module in the App, where KAE will initiate the Audit for the Franchise.
+	KAE will match the assets physically as per the data uploaded in the app. 
+	Prefilled data fields shown in the list form: Asset Category, Asset Make, Serial No, Asset Model.
+	For each asset serial no, KAE will click on button: “Initiate Audit”. This will open the pop-up window where the following actions will be taken by KAE:
+i.	Scan QR Code: KAE will scan the QR code in the app for the selected serial no. In case the QR code is not present KAE will have the option to manually enter the serial no of the asset and upload the photo of the asset. 
+ii.	Assets Category: Battery/ Charger/SOC Meter/Harness- Prefilled as per selection by KAE.
+iii.	Asset Status: This is Data Input by KAE. KAE will select the Asset status of each asset from the drop-down menu against each serial no of all audited assets (found or not found):
+1.	RTB at Franchise
+2.	RMT at Franchise
+3.	Deployed to Driver
+4.	Idle at Franchise
+5.	Theft
+6.	Burnt & at Franchise
+7.	Burnt & WH/Plant
+8.	Police Custody
+9.	Financer Custody
+10.	Not at Franchise
+iv.	KAE will then click on the “Submit” button to complete the asset audit.
+
+	Audit Status: - Once the KAE submits the audit, then for each audited asset below “Audit Status” will be maintained:
+i.	Asset Verified- This will be for the cases where the audit is approved automatically once the KAE scans the QR code, and serial no of QR code matches with the displayed serial no against which audit has been done. Assets scanned through QR Code will be approved automatically and moved to the Category- “Asset Verified”. For all the assets under category “Asset verified”, these assets will remain active in the inventory of the FP in app and can be deployed to DP., status will be maintained as Idle.
+ii.	Asset Mismatch- In Case where the wrong serial no has been added manually, the assets will be tagged as “Audit Mismatch” and will move to RECO category. KAE cannot deploy the assets until the audit is completed and FP is located for this asset. For the Reco Cases KAE will map the assets as per the existing process.
+iii.	Verification Approved – This will be for the cases where the KAE has manually entered the serail no and uploaded the asset photo. This will be approved by the HO WH Executive. In case of approval asset will be tagged as “Asset Mapping Approved”. In case of rejection then the category will be shown as “Asset Mismatch”. For all the assets under category “Asset Mapping Approved”, these assets will remain active in the inventory of the FP in app and can be deployed to DP., status will be maintained as Idle.
+
+
+
+
+
+
+
+
+
+
+
+
+
+	+ Add Asset- This is the case where the assets serial no is not shown in audit list, but at franchise asset is physically present. KAE can Manually add assets by clicking on “+ Add Asset Audit” with following input fields be given by KAE: Serial No (Scan QR Code or Manual input of serial no),QR Code Available- Yes or No, Asset Category, Assets Status, Photo and then submits the audit. Upon submit process it goes for approval to HO Executive who will check the Photo and serial no and can approve/reject the Asset audit.
+i.	Approved assets will be transferred to the Inventory Module for deployment. 
+ii.	Rejected assets will show as "Asset Mismatch." The serial number can be modified in Leasing CRM for approval.
+
+	Note- KAE will input the count of SOC Meter and Harness in Audit. Field to be shown in the audit page in app, where KAE will input the quantity of SOC Meter and Harness.
+3.	Audit Reports: The Reports section will have the option to show the view in tabular form in CRM or the user can download the reports in csv/xslx/pdf format.
+	Audit Signoff Report: Audit Report for Sign- From CRM user can generate the final audit report once the audit of the FP is completed. Once user clicks the Initiate “Audit signoff Report “, he cannot change the assets status or make changes in Audit in the app. Upon clicking the Final Audit report, Pdf report will be generated. This will be generated at Franchise or WH level only. Once the signed audit report has been uploaded and approved at 2 levels, then again Audit can be initiated:
+i.	Level -1- Warehouse Manager
+ii.	Level -2- Commercial Manager
+•	Once the uploaded audit report is approved then again FP audit can be re-initiated.
+•	The following data points will be shown in tabular format in the Final Audit Report of each FP.
+1.	Asset Type- 
+2.	Asset Serial No
+3.	Asset Status
+4.	Date of Audit Started
+5.	Date of Audit Completed
+6.	QR Code Available
+7.	Audit Status
+8.	Asset Location- This will be shown as per audit status
+•	The Header of this report will have the following details:
+1.	Report Name- Inventory Audit Report
+2.	Audit Date
+3.	Auditor Name- KAE
+4.	Franchise Name
+5.	Franchise SAP Code
+6.	Franchise City and State
+	Audit Report – This is the xlsx/csv format downloadable report from CRM showing the inventory status as per audit with all the below date points:
+1.	Audit Date
+2.	Auditor Name- KAE
+3.	Franchise Name
+4.	Franchise SAP Code
+5.	Franchise City and State
+6.	Asset Type- 
+7.	Asset Serial No
+8.	Asset Status
+9.	Date of Audit Started
+10.	Date of Audit Completed
+11.	QR Code Available
+12.	Audit Status
+13.	Asset Location- This will be shown as per audit status
