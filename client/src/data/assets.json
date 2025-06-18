@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "serialNumber": "BAT-2024-001",
+    "assetMake": "Exide",
+    "assetModel": "EXD-500",
+    "iotNumber": "IOT123456",
+    "assetCategory": "battery",
+    "franchiseId": 1,
+    "status": "pending",
+    "qrCodeAvailable": true,
+    "createdAt": "2025-06-18T12:00:00.000Z",
+    "updatedAt": "2025-06-18T12:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "serialNumber": "CHG-2024-002",
+    "assetMake": "Delta",
+    "assetModel": "DLT-200",
+    "iotNumber": "IOT789012",
+    "assetCategory": "charger",
+    "franchiseId": 1,
+    "status": "verified",
+    "assetStatus": "deployed-driver",
+    "qrCodeAvailable": true,
+    "createdAt": "2025-06-18T12:00:00.000Z",
+    "updatedAt": "2025-06-18T12:00:00.000Z"
+  },
+  {
+    "id": 3,
+    "serialNumber": "SOC-2024-003",
+    "assetMake": "TechSoc",
+    "assetModel": "TS-100",
+    "iotNumber": "IOT345678",
+    "assetCategory": "soc-meter",
+    "franchiseId": 1,
+    "status": "mismatch",
+    "qrCodeAvailable": false,
+    "createdAt": "2025-06-18T12:00:00.000Z",
+    "updatedAt": "2025-06-18T12:00:00.000Z"
+  }
+]

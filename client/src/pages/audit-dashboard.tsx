@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Battery, User, Plus, Home, List, Calculator, BarChart3 } from "lucide-react";
+import { Battery, User, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -16,6 +16,12 @@ import BottomNavigation from "@/components/bottom-navigation";
 import { useToast } from "@/hooks/use-toast";
 import type { Asset, Audit, Franchise } from "@shared/schema";
 
+// CHANGED: Import the local JSON data files
+import franchiseData from "@/data/franchise.json";
+import assetsData from "@/data/assets.json";
+import auditData from "@/data/audit.json";
+
+
 export default function AuditDashboard() {
   const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
   const [showAuditModal, setShowAuditModal] = useState(false);
@@ -29,19 +35,20 @@ export default function AuditDashboard() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
-  // Fetch franchise data (using franchise ID 1 for demo)
+  // CHANGED: Replaced API fetches with reads from our local JSON files.
   const { data: franchise } = useQuery<Franchise>({
-    queryKey: ['/api/franchise/1'],
+    queryKey: ['franchise-data'],
+    queryFn: async () => franchiseData
   });
 
-  // Fetch assets for the franchise
   const { data: assets = [], isLoading: assetsLoading } = useQuery<Asset[]>({
-    queryKey: ['/api/assets/franchise/1'],
+    queryKey: ['assets-data'],
+    queryFn: async () => assetsData
   });
 
-  // Fetch current audit
   const { data: audit } = useQuery<Audit>({
-    queryKey: ['/api/audit/franchise/1'],
+    queryKey: ['audit-data'],
+    queryFn: async () => auditData
   });
 
   // Filter assets based on active filter
@@ -77,43 +84,26 @@ export default function AuditDashboard() {
     setSelectedAsset(null);
   };
 
+  // CHANGED: Replaced the mutation function with a mock that pretends to work.
   const auditMutation = useMutation({
     mutationFn: async (data: { assetId: number; status: string; assetStatus?: string; verificationMethod: string; serialNumberScanned?: string; photoUrl?: string }) => {
-      // Update asset status
-      await fetch(`/api/assets/${data.assetId}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          status: data.status,
-          assetStatus: data.assetStatus
-        })
-      });
-
-      // Create audit entry
-      const auditResponse = await fetch('/api/audit-entries', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          auditId: audit?.id,
-          assetId: data.assetId,
-          verificationMethod: data.verificationMethod,
-          serialNumberScanned: data.serialNumberScanned,
-          photoUrl: data.photoUrl
-        })
-      });
-
-      return auditResponse.json();
+      console.log("Mock Audit Submission (data would not be saved on static site):", data);
+      // We can't save to a server, so we just pretend it worked.
+      await new Promise(resolve => setTimeout(resolve, 500)); // fake delay
+      return { success: true };
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/assets/franchise/1'] });
-      queryClient.invalidateQueries({ queryKey: ['/api/audit/franchise/1'] });
+      // On a real app, we'd refetch data. Here, we just show a success message.
+      // queryClient.invalidateQueries({ queryKey: ['assets-data'] }); // This won't do anything with static data
+      // queryClient.invalidateQueries({ queryKey: ['audit-data'] });
       handleCloseModals();
       toast({
-        title: "Audit Submitted",
+        title: "Audit Submitted (Demo)",
         description: "Asset audit has been submitted successfully.",
       });
     },
     onError: () => {
+      // This is unlikely to be called now, but we'll leave it.
       toast({
         title: "Error",
         description: "Failed to submit audit. Please try again.",
@@ -122,24 +112,17 @@ export default function AuditDashboard() {
     }
   });
 
+  // CHANGED: Replaced the mutation function with a mock.
   const addAssetMutation = useMutation({
     mutationFn: async (assetData: any) => {
-      const response = await fetch('/api/assets', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...assetData,
-          franchiseId: 1,
-          status: 'pending'
-        })
-      });
-      return response.json();
+      console.log("Mock Asset Add (data would not be saved on static site):", assetData);
+      await new Promise(resolve => setTimeout(resolve, 500)); // fake delay
+      return { success: true };
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/assets/franchise/1'] });
       handleCloseModals();
       toast({
-        title: "Asset Added",
+        title: "Asset Added (Demo)",
         description: "New asset has been added for verification.",
       });
     }
@@ -381,21 +364,13 @@ export default function AuditDashboard() {
         isOpen={showQuantityModal}
         onClose={handleCloseModals}
         onSubmit={(data) => {
-          // Update audit with quantities
-          if (audit) {
-            fetch(`/api/audits/${audit.id}`, {
-              method: 'PATCH',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(data)
-            }).then(() => {
-              queryClient.invalidateQueries({ queryKey: ['/api/audit/franchise/1'] });
-              handleCloseModals();
-              toast({
-                title: "Quantities Updated",
-                description: "SOC Meter and Harness counts have been saved.",
-              });
-            });
-          }
+          // CHANGED: This is also mocked
+          console.log("Mock Quantity Update:", data);
+          toast({
+            title: "Quantities Updated (Demo)",
+            description: "SOC Meter and Harness counts have been saved.",
+          });
+          handleCloseModals();
         }}
       />
 
