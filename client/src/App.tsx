@@ -1,4 +1,4 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, Router } from "wouter"; // <--- 1. UPDATED IMPORT
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -6,7 +6,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import AuditDashboard from "@/pages/audit-dashboard";
 
-function Router() {
+// 2. RENAMED THE FUNCTION
+function AppRoutes() {
   return (
     <Switch>
       <Route path="/" component={AuditDashboard} />
@@ -21,7 +22,10 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <Router />
+        {/* 3. WRAPPED with ROUTER and added the BASE property */}
+        <Router base="/auditmodulefinal">
+          <AppRoutes />
+        </Router>
       </TooltipProvider>
     </QueryClientProvider>
   );
